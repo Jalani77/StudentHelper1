@@ -1,5 +1,7 @@
 """FastAPI application for YiriAi StudentHelper"""
 
+from typing import Any
+
 from fastapi import FastAPI, Query
 
 from gsu_paws_scraper import scrape_gsu_paws_courses
@@ -12,7 +14,7 @@ def gsu_search(
     term: str = Query(..., description="The term to search for (e.g., 'Fall 2024')"),
     subject: str = Query(..., description="The subject code (e.g., 'CSC')"),
     campus: str = Query(..., description="The campus location (e.g., 'Atlanta')")
-) -> list:
+) -> list[dict[str, Any]]:
     """
     Search for GSU PAWS courses.
     

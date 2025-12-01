@@ -1,7 +1,9 @@
 """GSU PAWS Course Scraper Module"""
 
+from typing import Any
 
-def scrape_gsu_paws_courses(term: str, subject: str, campus: str) -> list:
+
+def scrape_gsu_paws_courses(term: str, subject: str, campus: str) -> list[dict[str, Any]]:
     """
     Scrape GSU PAWS courses for the given term, subject, and campus.
     
