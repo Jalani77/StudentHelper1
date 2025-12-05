@@ -1,0 +1,26 @@
+[
+  {
+    "subject": "CSC",
+    "course_number": "1301",
+    "grade": "A",
+    "term": "202308"
+  },
+  {
+    "subject": "MATH",
+    "course_number": "1111",
+    "grade": "B",
+    "term": "202308"
+  },
+  {
+    "subject": "CSC",
+    "course_number": "1302",
+    "grade": "A",
+    "term": "202401"
+  },
+  {
+    "subject": "ENGL",
+    "course_number": "1101",
+    "grade": "B",
+    "term": "202308"
+  }
+]

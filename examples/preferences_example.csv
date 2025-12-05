@@ -1,0 +1,5 @@
+subject,course_number,priority,online_only,exclude_professors
+CSC,2510,1,false,
+MATH,2211,1,false,
+CSC,3320,2,false,"Hard Professor"
+PHYS,2211,2,false,

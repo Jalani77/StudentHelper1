@@ -1,0 +1,45 @@
+# Example preference files for YiriAi
+
+# preferences.json - Full configuration example
+{
+  "courses": [
+    {
+      "subject": "CSC",
+      "course_number": "2510",
+      "priority": 1,
+      "online_only": false,
+      "exclude_professors": [],
+      "preferred_times": [
+        {
+          "days": ["M", "W", "F"],
+          "start_time": "09:00",
+          "end_time": "11:00"
+        }
+      ]
+    },
+    {
+      "subject": "MATH",
+      "course_number": "2211",
+      "priority": 1,
+      "online_only": false
+    },
+    {
+      "subject": "CSC",
+      "course_number": "3320",
+      "priority": 2,
+      "online_only": false
+    }
+  ],
+  "subjects": ["CSC", "MATH"],
+  "max_credits": 15,
+  "avoid_time_conflicts": true,
+  "prefer_online": false,
+  "min_professor_rating": 3.5
+}
+
+# Simple preferences array
+[
+  {"subject": "CSC", "course_number": "2510", "priority": 1},
+  {"subject": "MATH", "course_number": "2211", "priority": 1},
+  {"subject": "CSC", "priority": 2}
+]
