@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Mail, Lock, User, GraduationCap } from 'lucide-react'
 import { Input, Button } from '../components/ui'
+import { apiClient } from '../api/client'
 import toast from 'react-hot-toast'
 
 export default function SignUp() {
@@ -30,12 +31,21 @@ export default function SignUp() {
     setIsLoading(true)
     
     try {
-      // TODO: Implement actual registration
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const response = await apiClient.auth.signUp(
+        formData.name,
+        formData.email,
+        formData.password
+      )
+      
+      // Save token
+      localStorage.setItem('auth_token', response.data.access_token)
+      localStorage.setItem('user', JSON.stringify(response.data.user))
+      
       toast.success('Account created! Welcome to YiriAi')
       navigate('/upload')
     } catch (error) {
-      toast.error('Registration failed')
+      const message = error.response?.data?.detail || 'Registration failed'
+      toast.error(message)
     } finally {
       setIsLoading(false)
     }

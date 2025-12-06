@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Mail, Lock, GraduationCap } from 'lucide-react'
 import { Input, Button } from '../components/ui'
+import { apiClient } from '../api/client'
 import toast from 'react-hot-toast'
 
 export default function SignIn() {
@@ -17,12 +18,17 @@ export default function SignIn() {
     setIsLoading(true)
     
     try {
-      // TODO: Implement actual authentication
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const response = await apiClient.auth.signIn(formData.email, formData.password)
+      
+      // Save token
+      localStorage.setItem('auth_token', response.data.access_token)
+      localStorage.setItem('user', JSON.stringify(response.data.user))
+      
       toast.success('Welcome back!')
       navigate('/dashboard')
     } catch (error) {
-      toast.error('Invalid credentials')
+      const message = error.response?.data?.detail || 'Invalid credentials'
+      toast.error(message)
     } finally {
       setIsLoading(false)
     }

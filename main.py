@@ -19,6 +19,7 @@ from utils.file_parser import FileParser
 from config import settings
 from cache import cache_manager
 from database import init_db, get_db
+from api_routes import router as api_router
 
 # Configure structured logging
 structlog.configure(
@@ -90,11 +91,14 @@ app = FastAPI(
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=settings.cors_origins_list,
     allow_credentials=settings.cors_allow_credentials,
-    allow_methods=settings.cors_allow_methods,
-    allow_headers=settings.cors_allow_headers,
+    allow_methods=settings.cors_methods_list,
+    allow_headers=settings.cors_headers_list,
 )
+
+# Include API routes
+app.include_router(api_router)
 
 
 @app.get("/")

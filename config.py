@@ -64,10 +64,31 @@ class Settings(BaseSettings):
     metrics_port: int = 9090
     
     # CORS
-    cors_origins: list[str] = ["*"]
+    cors_origins: str = "*"  # Can be comma-separated list or "*"
     cors_allow_credentials: bool = True
-    cors_allow_methods: list[str] = ["*"]
-    cors_allow_headers: list[str] = ["*"]
+    cors_allow_methods: str = "*"  # Can be comma-separated list or "*"
+    cors_allow_headers: str = "*"  # Can be comma-separated list or "*"
+    
+    @property
+    def cors_origins_list(self) -> list[str]:
+        """Parse CORS origins into a list"""
+        if self.cors_origins == "*":
+            return ["*"]
+        return [origin.strip() for origin in self.cors_origins.split(",")]
+    
+    @property
+    def cors_methods_list(self) -> list[str]:
+        """Parse CORS methods into a list"""
+        if self.cors_allow_methods == "*":
+            return ["*"]
+        return [method.strip() for method in self.cors_allow_methods.split(",")]
+    
+    @property
+    def cors_headers_list(self) -> list[str]:
+        """Parse CORS headers into a list"""
+        if self.cors_allow_headers == "*":
+            return ["*"]
+        return [header.strip() for header in self.cors_allow_headers.split(",")]
 
 
 # Global settings instance

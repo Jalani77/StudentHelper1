@@ -41,13 +41,17 @@ export const apiClient = {
   // Health check
   health: () => api.get('/health'),
   
-  // Authentication (TODO: implement backend endpoints)
+  // Authentication
   auth: {
     signIn: (email, password) =>
-      api.post('/auth/signin', { email, password }),
+      api.post('/auth/login', { email, password }),
     signUp: (name, email, password) =>
-      api.post('/auth/signup', { name, email, password }),
-    signOut: () => api.post('/auth/signout'),
+      api.post('/auth/register', { name, email, password }),
+    signOut: () => {
+      localStorage.removeItem('auth_token')
+      return Promise.resolve()
+    },
+    getMe: () => api.get('/auth/me'),
   },
   
   // Upload and parse degree evaluation

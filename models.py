@@ -2,8 +2,37 @@
 Data models for YiriAi application
 """
 from pydantic import BaseModel, Field
-from typing import List, Optional, Dict
-from datetime import time
+from typing import List, Optional, Dict, Any
+from datetime import time, datetime
+
+
+# Authentication Models
+class UserCreate(BaseModel):
+    """User registration model"""
+    name: str = Field(..., min_length=1, max_length=100)
+    email: str
+    password: str = Field(..., min_length=8)
+
+
+class UserLogin(BaseModel):
+    """User login model"""
+    email: str
+    password: str
+
+
+class Token(BaseModel):
+    """JWT token response"""
+    access_token: str
+    token_type: str = "bearer"
+    user: Dict[str, Any]
+
+
+class User(BaseModel):
+    """User model"""
+    id: str
+    name: str
+    email: str
+    created_at: datetime
 
 
 class TimeSlot(BaseModel):
